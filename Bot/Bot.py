@@ -2,10 +2,10 @@ import asyncio
 import logging
 from aiogram import Bot, Dispatcher
 
-from Bot.database.init_db import init_db, engine
-from Bot.middleware.promptBootstrap import PromptBootstrapMiddleware
+from TgBot.Bot.database.init_db import init_db, engine
+from TgBot.Bot.middleware.promptBootstrap import PromptBootstrapMiddleware
 from handlers import handler
-from ENV import env
+from TgBot.ENV import env
 from models import Base
 
 logging.basicConfig(level=logging.INFO)

@@ -1,5 +1,5 @@
 from sqlalchemy import select
-from Bot.models import User
+from TgBot.Bot.models import User
 
 
 async def get_or_create_user(

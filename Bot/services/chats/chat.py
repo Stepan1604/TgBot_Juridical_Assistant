@@ -1,5 +1,5 @@
 from sqlalchemy import select
-from Bot.models import Chat
+from TgBot.Bot.models import Chat
 
 
 async def get_active_chat(session, user_id: int) -> Chat:
