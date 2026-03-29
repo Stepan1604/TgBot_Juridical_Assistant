@@ -252,7 +252,7 @@ async def document(message: types.Message, state: FSMContext):
             user_msg = Message(
                 chat_id=chat.id,
                 role="user",
-                content=f"{message.html_text}:\n{result.text_content}",
+                content=f"{message.html_text}: \n{result.text_content}",
             )
             session.add(user_msg)
             await session.commit()
