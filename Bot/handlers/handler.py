@@ -8,13 +8,13 @@ from sqlalchemy import select
 from aiogram.types import FSInputFile
 from sqlalchemy.util import methods_equivalent
 
-from TgBot.Bot.database.init_db import AsyncSessionLocal
-from TgBot.Bot.keyboard.keyboard import get_kb
-from TgBot.Bot.models import User, Message, Rating
-from TgBot.Bot.services.chats.chat import get_active_chat
-from TgBot.Bot.services.users.users import get_or_create_user
-from TgBot.Bot.vars.dialog import *
-from TgBot.Bot.GPT import llm_request
+from Bot.database.init_db import AsyncSessionLocal
+from Bot.keyboard.keyboard import get_kb
+from Bot.models import User, Message, Rating
+from Bot.services.chats.chat import get_active_chat
+from Bot.services.users.users import get_or_create_user
+from Bot.vars.dialog import *
+from Bot.GPT import llm_request
 
 from markitdown import MarkItDown
 

@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from TgBot.Bot.models import Prompt
 from huggingface_hub import InferenceClient
-from TgBot.ENV import env
+from ENV import env
 
 api_key = env.LLM_TOKEN
 model = "openai/gpt-oss-120b"
