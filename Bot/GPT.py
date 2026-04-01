@@ -4,7 +4,7 @@ from huggingface_hub import InferenceClient
 from TgBot.ENV import env
 
 api_key = env.LLM_TOKEN
-model = "openai/gpt-oss-120b"
+model = "openai/gpt-oss-120b:novita"
 
 client = InferenceClient(api_key=api_key)
 
@@ -32,6 +32,13 @@ async def llm_request(
         )
 
     system_prompt = "\n\n".join(system_parts)
+    messages = [
+        {
+            "role": "system",
+            "content": system_prompt,
+        },
+        *messages,
+    ]
 
     chat_response = client.chat.completions.create(
         model=model,
