@@ -198,7 +198,7 @@ async def document(message: types.Message, state: FSMContext):
     markitdown = MarkItDown()
     result = markitdown.convert(rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}.docx")
 
-    if message.html_text == None:
+    if message.html_text == "":
         async with AsyncSessionLocal() as session:
             user = (
                 await session.execute(
@@ -206,39 +206,13 @@ async def document(message: types.Message, state: FSMContext):
                 )
             ).scalar_one()
 
-            chat = await get_active_chat(session, user.id)
-
-            user_msg = Message(
-                chat_id=chat.id,
-                role="user",
-                content=f"Проанализируй текст, кратко перескажи и выяви все плюсы и недостатки данного документа:\n{result.text_content}",
-            )
-            session.add(user_msg)
-            await session.commit()
-
-            history = (
-                await session.execute(
-                    select(Message)
-                    .where(Message.chat_id == chat.id)
-                    .order_by(Message.created_at)
-                )
-            ).scalars().all()
+            content = f"Проанализируй текст, кратко перескажи и выяви все плюсы и недостатки данного документа:\n{result.text_content}"
 
             messages = [
-                {"role": m.role, "content": m.content}
-                for m in history
+                {"role": "user", "content": content}
             ]
 
             response = await llm_request(session, messages, user.age)
-
-        async with AsyncSessionLocal() as session:
-            assistant_msg = Message(
-                chat_id=chat.id,
-                role="assistant",
-                content=response,
-            )
-            session.add(assistant_msg)
-            await session.commit()
     else:
         async with AsyncSessionLocal() as session:
             user = (
@@ -247,39 +221,13 @@ async def document(message: types.Message, state: FSMContext):
                 )
             ).scalar_one()
 
-            chat = await get_active_chat(session, user.id)
-
-            user_msg = Message(
-                chat_id=chat.id,
-                role="user",
-                content=f"{message.html_text}:\n{result.text_content}",
-            )
-            session.add(user_msg)
-            await session.commit()
-
-            history = (
-                await session.execute(
-                    select(Message)
-                    .where(Message.chat_id == chat.id)
-                    .order_by(Message.created_at)
-                )
-            ).scalars().all()
+            content = f"{message.html_text}:\n{result.text_content}"
 
             messages = [
-                {"role": m.role, "content": m.content}
-                for m in history
+                {"role": "user", "content": content}
             ]
 
             response = await llm_request(session, messages, user.age)
-
-        async with AsyncSessionLocal() as session:
-            assistant_msg = Message(
-                chat_id=chat.id,
-                role="assistant",
-                content=response,
-            )
-            session.add(assistant_msg)
-            await session.commit()
 
     await message.answer(response, parse_mode="HTML")
     await state.set_state(BotStates.waiting_request)
