@@ -7,7 +7,7 @@ def get_kb():
             types.KeyboardButton(text="Оценить бота"),
         ],
         [
-            types.KeyboardButton(text="Отправить документ(.docx)")
+            types.KeyboardButton(text="Отправить документ")
         ]
     ]
     keyboard = types.ReplyKeyboardMarkup(keyboard=kb,

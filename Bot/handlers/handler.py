@@ -176,7 +176,7 @@ async def all_grades(message: types.Message):
 
     await message.answer("\n\n".join(text))
 
-@rt.message(F.text == "Отправить документ(.docx)", BotStates.waiting_request)
+@rt.message(F.text == "Отправить документ", BotStates.waiting_request)
 async def document(message: types.Message, state: FSMContext):
     await message.answer("Отправьте свой документ")
     await state.set_state(BotStates.waiting_document)
@@ -186,7 +186,7 @@ async def document(message: types.Message, state: FSMContext):
     bot = message.bot
 
     name = message.from_user.id
-    file_path = rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}.docx"
+    file_path = rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}"
 
     user_document = message.document
 
@@ -195,7 +195,7 @@ async def document(message: types.Message, state: FSMContext):
     await message.answer("Файл успешно принят")
 
     markitdown = MarkItDown()
-    result = markitdown.convert(rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}.docx")
+    result = markitdown.convert(rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}")
 
     if message.html_text == "":
         async with AsyncSessionLocal() as session:
