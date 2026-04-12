@@ -74,7 +74,7 @@ async def cmd_age(message: types.Message, state: FSMContext):
 
 @rt.message(F.text == "Тех. Поддержка", BotStates.waiting_request)
 async def cmd_teh(message: types.Message):
-    print(f"{message.from_user.id} {message.from_user.full_name}: {message.html_text}")
+    print(f"{message.from_user.id}: {message.html_text}")
     await message.answer(SYNC_TEXT)
 
 
@@ -145,7 +145,6 @@ async def cmd_grade_text(message: types.Message, state: FSMContext):
 
 @rt.message(F.text == "Все оценки", BotStates.waiting_request)
 async def all_grades(message: types.Message):
-    print(f"{message.from_user.id} {message.from_user.full_name}: {message.text}")
 
     async with AsyncSessionLocal() as session:
         result = await session.execute(
