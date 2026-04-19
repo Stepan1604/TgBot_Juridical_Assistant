@@ -4,7 +4,7 @@ def get_kb():
     kb = [
         [
             types.KeyboardButton(text="Тех. Поддержка",),
-            types.KeyboardButton(text="Оценить бота"),
+            types.KeyboardButton(text="Оценить бота")
         ],
         [
             types.KeyboardButton(text="Отправить документ")
@@ -12,6 +12,6 @@ def get_kb():
     ]
     keyboard = types.ReplyKeyboardMarkup(keyboard=kb,
                                          resize_keyboard=True,
-                                         input_field_placeholder="Введите ваш запрос"
+                                         input_field_placeholder="Введите ваш запрос",
                                          )
     return keyboard
