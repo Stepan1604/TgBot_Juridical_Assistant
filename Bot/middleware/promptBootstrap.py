@@ -2,10 +2,10 @@ from aiogram import BaseMiddleware
 from sqlalchemy import select, func
 from typing import Callable, Awaitable, Any
 
-from TgBot.Bot.models import Prompt
-from TgBot.Bot.database.init_db import AsyncSessionLocal
+from models import Prompt
+from database.init_db import AsyncSessionLocal
 
-from TgBot.Bot.vars.prompt import AGE_POLICY_PROMPT, LEGAL_SYSTEM_PROMPT
+from vars.prompt import AGE_POLICY_PROMPT, LEGAL_SYSTEM_PROMPT
 
 
 class PromptBootstrapMiddleware(BaseMiddleware):

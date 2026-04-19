@@ -8,13 +8,13 @@ from sqlalchemy import select
 from aiogram.types import FSInputFile
 from sqlalchemy.util import methods_equivalent
 
-from TgBot.Bot.database.init_db import AsyncSessionLocal
-from TgBot.Bot.keyboard.keyboard import get_kb
-from TgBot.Bot.models import User, Message, Rating
-from TgBot.Bot.services.chats.chat import get_active_chat
-from TgBot.Bot.services.users.users import get_or_create_user
-from TgBot.Bot.vars.dialog import *
-from TgBot.Bot.GPT import llm_request
+from database.init_db import AsyncSessionLocal
+from keyboard.keyboard import get_kb
+from models import User, Message, Rating
+from services.chats.chat import get_active_chat
+from services.users.users import get_or_create_user
+from vars.dialog import *
+from GPT import llm_request
 
 from markitdown import MarkItDown
 
@@ -196,7 +196,7 @@ async def document(message: types.Message, state: FSMContext):
     await message.answer("Файл успешно принят")
 
     markitdown = MarkItDown()
-    result = markitdown.convert(rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}.docx")
+    result = markitdown.convert(rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}")
 
     if message.html_text == "":
         async with AsyncSessionLocal() as session:
