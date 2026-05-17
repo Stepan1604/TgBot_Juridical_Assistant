@@ -169,7 +169,7 @@ async def all_grades(message: types.Message):
     for tg_id, username, score, comment, created_at in rows:
         text.append(
             f"👤 {str(tg_id) + ' - ' + username}\n"
-            f"⭐ Оценка: {score}\n"
+                f"⭐ Оценка: {score}\n"
             f"💬 Комментарий: {comment or '—'}\n"
             f"🕒 {created_at:%d.%m.%Y %H:%M}"
         )
