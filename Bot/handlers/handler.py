@@ -9,7 +9,7 @@ from aiogram.types import FSInputFile
 from sqlalchemy.util import methods_equivalent
 
 from database.init_db import AsyncSessionLocal
-from keyboard.keyboard import get_kb
+from keyboards.keyboard import get_kb
 from models import User, Message, Rating
 from services.chats.chat import get_active_chat
 from services.users.users import get_or_create_user
@@ -185,17 +185,19 @@ async def document(message: types.Message, state: FSMContext):
 async def document(message: types.Message, state: FSMContext):
     bot = message.bot
 
-    name = message.from_user.id
-    file_path = rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}"
-
     user_document = message.document
+
+    name = message.from_user.id
+    extension = user_document.file_name.split(".")[-1]
+    file_path = rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}.{extension}"
+    print(file_path)
 
     await bot.download(file=user_document, destination=file_path)
 
     await message.answer("Файл успешно принят")
 
     markitdown = MarkItDown()
-    result = markitdown.convert(rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}")
+    result = markitdown.convert(rf"C:\Users\ASUS\Pycharm\TgBot\Documents\{name}.{extension}")
 
     if message.html_text == "":
         async with AsyncSessionLocal() as session:

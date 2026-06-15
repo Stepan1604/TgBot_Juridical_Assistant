@@ -10,8 +10,8 @@ def get_kb():
             types.KeyboardButton(text="Отправить документ")
         ]
     ]
-    keyboard = types.ReplyKeyboardMarkup(keyboard=kb,
+    kb_res = types.ReplyKeyboardMarkup(keyboard=kb,
                                          resize_keyboard=True,
                                          input_field_placeholder="Введите ваш запрос",
                                          )
-    return keyboard
+    return kb_res
